@@ -3,24 +3,14 @@ export default {
   content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        robotto: ["Roboto", "sans-serif"],
+      colors: {
+        "primary": "#FD2C6D",
+        "secondary": "#F6CCD3",
+        "third": "#F0CD98",
+        "fourth": "#484E8C",
+        "radial": "#F6CCD3",
       }
     },
-    screens: {
-      'sm:': '640px',
-    },
-    keyframes: {
-      'slide-up': {
-        '0%': { transform: 'translateY(100%)' },
-        '100%': { transform: 'translateY(0)' },
-      },
-    },
-    animation: {
-      'slide-up': 'slide-up 0.3s ease-out',
-    },
-
   },
   plugins: [],
 }
