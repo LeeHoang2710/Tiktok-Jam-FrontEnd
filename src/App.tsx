@@ -1,9 +1,8 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import ProductCard from './components/Product/ProductCard';
 import { Routes, Route } from 'react-router-dom'; // Corrected Router to Route
 import Personalize from './components/Product/Personalize';
 import ForYouPage from './pages/ForYouPage'
+import MainPage from './pages/MainPage';
 
 const App = () => {
   return (
@@ -12,8 +11,7 @@ const App = () => {
         <Route path='/foryou' element={<ForYouPage />} />
         <Route path='/' element={
           <div>
-            <Header />
-            <ProductCard />
+            <MainPage />
           </div>} />
         <Route path='/personalize' element={<Personalize />} />
       </Routes>

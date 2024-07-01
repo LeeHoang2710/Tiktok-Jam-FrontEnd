@@ -7,7 +7,7 @@ const Header = () => {
    const navigate = useNavigate();
 
    return (
-      <nav className='bg-neutral-800 sticky top-0 flex sm:justify-between items-center px-1 gap-1'>
+      <nav className='bg-neutral-800 fixed top-0 flex sm:justify-between items-center px-1 gap-1'>
          <SearchBar />
          <div className='flex items-center'>
             <FaBars className='text-white mr-4 cursor-pointer' onClick={() => {/* Handle menu toggle */ }} />
