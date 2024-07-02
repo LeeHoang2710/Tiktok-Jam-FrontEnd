@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'; // Corrected Router to Route
 import Personalize from './components/Product/Personalize';
 import ForYouPage from './pages/ForYouPage'
 import MainPage from './pages/MainPage';
+import { Button } from '../@/components/ui/button'
+
 
 const App = () => {
   return (
@@ -14,6 +16,10 @@ const App = () => {
             <MainPage />
           </div>} />
         <Route path='/personalize' element={<Personalize />} />
+        <Route path='/new' element={
+          <div className='bg-red-600'>
+            <Button>Click me</Button>
+          </div>} />
       </Routes>
     </div>
   );

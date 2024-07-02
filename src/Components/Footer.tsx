@@ -12,14 +12,12 @@ type Props = {}
 
 const Footer = (props: Props) => {
   return (
-    <div className='fixed top-0'>
-      <div className="flex justify-between cursor-pointer py-2 bg-black px-8 max-w-md fixed-footer-mobile">
-        <img src={Home}></img>
-        <img src={Discover}></img>
-        <img src={BackHome}></img>
-        <img src={Inbox}></img>
-        <img src={Me}></img>
-      </div>
+    <div className="flex justify-between cursor-pointer py-2 bg-black px-8 max-w-md fixed-footer-mobile">
+      <img src={Home}></img>
+      <img src={Discover}></img>
+      <img src={BackHome}></img>
+      <img src={Inbox}></img>
+      <img src={Me}></img>
     </div>
   )
 }
