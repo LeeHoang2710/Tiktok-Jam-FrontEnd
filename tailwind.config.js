@@ -18,10 +18,10 @@ export default {
     },
     extend: {
       colors: {
-        "Primary": "#FD2C6D",
-        "Secondary": "#F6CCD3",
-        "Third": "#F0CD98",
-        "Fourth": "#484E8C",
+        "priTheme": "#FD2C6D",
+        "secTheme": "#F6CCD3",
+        "thiTheme": "#F0CD98",
+        "fouTheme": "#484E8C",
         "Radial": "#F6CCD3",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -16,7 +16,7 @@ const ForYouPage = (props: Props) => {
   const displayItems = getAllProduct.slice(0, 4)
   const [pick, Setpick] = useState(1);
   return (
-    <div className="flex flex-col justify-between max-w-md bg-gradient-to-br from-primary to-third mx-auto shadow-lg">
+    <div className="flex flex-col justify-between max-w-md bg-gradient-to-br from-priTheme to-thiTheme mx-auto shadow-lg">
       <Header />
       <div className="flex flex-col gap-10 p-6 justify-between rounded-lg">
         <div className="flex mx-4 mt-4 justify-between rounded-md ">
@@ -38,7 +38,7 @@ const ForYouPage = (props: Props) => {
           {displayItems.map((product) => (<DisplayItem key={product.id} product={product} />))}
         </div>
         <div className="flex justify-between font-medium mx-auto gap-16 ">
-          <button className="bg-secondary shadow-xl py-2 px-2 w-[150px] rounded-xl text-md">Not Interested</button>
+          <button className="bg-secTheme shadow-xl py-2 px-2 w-[150px] rounded-xl text-md">Not Interested</button>
           <button className="bg-white shadow-xl py-2 px-2 w-[150px] rounded-xl text-md">See More</button>
         </div>
       </div>
