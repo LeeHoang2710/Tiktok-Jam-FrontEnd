@@ -76,11 +76,12 @@
   }
 }
 
-@media screen and (min-height: 900px) and (max-height: 950px) {
+@media screen and (min-height: 0px) and (max-height: 950px) {
   .fixed-footer-mobile {
     position: fixed;
     bottom: 0;
-    left: 0;
+    transform: translateX(-50%);
+    left: 50%;
     width: 100%;
   }
 }
