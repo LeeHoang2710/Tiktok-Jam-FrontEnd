@@ -18,11 +18,11 @@ export default {
     },
     extend: {
       colors: {
-        "priTheme": "#FD2C6D",
-        "secTheme": "#F6CCD3",
-        "thiTheme": "#F0CD98",
-        "fouTheme": "#484E8C",
-        "Radial": "#F6CCD3",
+        bgPrimary: "var(--color-bg-primary)",
+        bgSecondary: "var(--color-bg-secondary)",
+        buttonPrimary: "var(--color-button-primary)",
+        tBase: "var(--color-text-base)",
+        tBaseSecondary: "var(--color-text-base-secondary)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -77,6 +77,9 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontFamily: {
+        custom: ["Roboto", "sans-serif"],
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
