@@ -65,11 +65,8 @@ const ForYouPage = () => {
         </div>
         <div className="w-full flex justify-between font-custom font-semibold gap-8 opacity-90 ">
           <div className="w-full ">
-            <Link to="/personalize" >
-              <button className="w-full bg-bgPrimary text-tBase shadow-xl py-3 rounded-xl text-md">
-                Sepecific Needs
-              </button>
-            </Link>
+          <button className="w-full bg-bgPrimary text-tBase shadow-xl py-3 rounded-xl text-md "><PopupDrawer/></button>
+            
           </div>
           <div className="w-full">
             <button className="w-full bg-buttonPrimary text-tBase shadow-xl py-3 rounded-xl text-md ">See More</button>
@@ -85,9 +82,8 @@ const ForYouPage = () => {
         </div>
         
       </div>
+      <div className="absolute mx-auto bottom-[100px] left-1/2 -translate-x-1/2"><Rating/></div>
       </div>
-      <Rating />
-      
       <Footer />
     </div>
   )

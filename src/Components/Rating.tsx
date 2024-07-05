@@ -21,7 +21,7 @@ const Rating = () => {
    return (
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
          <DialogTrigger asChild>
-            <button className='flex items-center justify-center gap-2 py-8 text-gray-500'>
+            <button className='flex items-center justify-center gap-2 text-gray-300 opacity-70'>
                <FaAngleDoubleUp />
                Swipe up to skip
             </button>

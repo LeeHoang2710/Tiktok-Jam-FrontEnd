@@ -12,8 +12,7 @@ const App = () => {
   return (
     <div className='bg-neutral-800'>
       <Routes>
-        <Route path='/foryou' element={<ForYouPage />} />
-        <Route path='/' element={<Rating />} />
+        <Route path='/' element={<ForYouPage />} />
         <Route path='/personalize' element={<Personalize />} />
         <Route path='/new' element={
           <div className='bg-red-600'>
