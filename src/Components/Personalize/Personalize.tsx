@@ -90,7 +90,7 @@ const Personalize = () => {
    };
 
    return (
-      <div className="w-full mx-auto font-custom bg-bgDark shadow-lg overflow-y-scroll">
+      <div className="w-full mx-auto font-custom bg-neutral-900 shadow-lg overflow-y-scroll">
          <section className="mt-4 flex items-center justify-between px-4">
             <h3 className="text-xl font-semibold text-white">Categories</h3>
             <ComboBox category={category} setCategory={setCategory} />
@@ -150,7 +150,7 @@ const Personalize = () => {
          {showInput && (
             <div className="w-full p-4 ">
                <textarea
-                  className="w-full h-24 p-4 text-xl outline-none"
+                  className="w-full bg-gray-200 h-24 p-4 text-xl outline-none"
                   placeholder="Tell me you circumstances... (eg: i need a dress for a wedding)"
                />
             </div>
