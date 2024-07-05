@@ -1,7 +1,7 @@
 
 import pro1 from "../../public/products/adults-plain-cotton-tshirt-2-pack-teal.jpg"
 import ReactCardFlip from 'react-card-flip';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MdShoppingCart } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 
@@ -16,31 +16,69 @@ type Product = {
 type Props = {
   product: Product;
 }
+const getInteger = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+
+}
 
 const DisplayItem = ({ product }: Props) => {
+  const [flip, setFlip] = useState(false);
+  const [randomNumber, setRandomNumber] = useState(0);
+  const [randomSold, setRandomSold] = useState(0);
+  useEffect(() => {
+    setRandomNumber(getInteger(20, 100))
+    setRandomSold(getInteger(500, 2000))
+  }, [])
   return (
-    <div className="relative flex flex-col justify-between items-center pt-6 pb-4 gap-2 w-44 h-64 rounded-[48px] shadow-xl bg-white">
-      <div className="flex w-5/6 border-2 border-gray-300 items-center h-3/5  rounded-[36px] overflow-hidden">
-        <img src={pro1} className="object-cover"></img>
-      </div>
-      <h3 className="text-center font-semibold text-lg">Items Testing</h3>
-      <div className="flex w-full justify-between px-2 items-center">
-        <div className="w-2/3 bg-gray-200 rounded-full dark:bg-gray-700">
-          <div className="bg-blue-600 text-xs font-medium text-blue-100 text-center w-[45%] p-0.5 leading-none rounded-full" > 45%</div>
+    <ReactCardFlip isFlipped={flip} flipDirection="horizontal">
+      <div className="relative mx-auto flex flex-col justify-between items-center pt-6 pb-4 gap-2 w-[90%] h-[90%] rounded-[48px] shadow-xl bg-bgPrimary " onClick={() => { setFlip(!flip) }}>
+        <div className="flex w-5/6 border-2 border-gray-300 items-center h-3/5  rounded-[36px] overflow-hidden">
+          <img src={pro1} className="object-cover"></img>
         </div>
-        <p className="text-[10px] font-medium">8204 Sold</p>
+        <h3 className="text-center font-semibold text-tBase text-md">{product.name.length <= 12 ? product.name : `${product.name.slice(0, 12)}...`}</h3>
+        <div className="flex w-[90%] justify-between items-center">
+          <div className="w-3/5 bg-gray-200 rounded-full dark:bg-gray-700">
+            <div className={`bg-bgSecondary text-xs font-medium text-white text-center w-[${randomNumber}%] p-1 leading-none rounded-full`}>${randomNumber}</div>
+          </div>
+          <p className="text-lg font-medium">{randomSold}<span className="text-[10px] pl-[2px]">Sold</span>
+          </p>
+        </div>
+        <h4 className="text-center text-xl font-semibold text-tBase">
+          ${(product.price_cents / 100).toFixed(2)}
+          &nbsp;
+          <span className="line-through text-sm font-semibold text-tBaseSecondary">${((product.price_cents * 1.3) / 100).toFixed(2)}</span>
+        </h4>
+        <div className="absolute flex w-2/3 justify-between text-[42px] top-0 translate -translate-y-1/2">
+          <FaHeart className="border-[1px] cursor-pointer border-gray-300 p-2 text-red-400 rounded-full bg-white " />
+          <MdShoppingCart className="border-[1px] cursor-pointer border-gray-300 p-2 text-tBase rounded-full bg-white" />
+        </div>
+
       </div>
-      <h4 className="text-center text-2xl font-semibold text-red-500">
-        ${(product.price_cents / 100).toFixed(2)}
-        &nbsp;
-        <span className="line-through text-lg font-semibold text-third">${((product.price_cents * 1.3) / 100).toFixed(2)}</span>
-      </h4>
-      <div className="absolute flex w-2/3 justify-between text-[42px] top-0 translate -translate-y-1/2">
-        <FaHeart className="border-[1px] cursor-pointer border-gray-300 p-2 text-red-400 rounded-full bg-white " />
-        <MdShoppingCart className="border-[1px] cursor-pointer border-gray-300 p-2 text-blue-600 rounded-full bg-white" />
+      <div className="relative mx-auto flex flex-col justify-between items-center pt-6 pb-4 gap-2 w-[90%] h-[90%] rounded-[48px] shadow-xl bg-bgPrimary " onClick={() => { setFlip(!flip) }}>
+        <div className="flex w-5/6 border-2 border-gray-300 items-center h-3/5  rounded-[36px] overflow-hidden">
+          <img src={pro1} className="object-cover"></img>
+        </div>
+        <h3 className="text-center font-semibold text-tBase  text-md">Items Testing</h3>
+        <div className="flex w-5/6 justify-between items-center">
+          <div className="w-2/3 bg-gray-200 rounded-full dark:bg-gray-700">
+            <div className="bg-bgSecondary text-xs font-medium text-white text-center w-[65%] p-1 leading-none rounded-full" > 65%</div>
+          </div>
+          <p className="text-[10px] font-medium">804 Sold</p>
+        </div>
+        <h4 className="text-center text-sm font-semibold text-tBase">
+          ${(product.price_cents / 100).toFixed(2)}
+          &nbsp;
+          <span className="line-through text-lg font-semibold text-tBaseSecondary">${((product.price_cents * 1.2) / 100).toFixed(2)}</span>
+        </h4>
+        <div className="absolute flex w-2/3 justify-between text-[42px] top-0 translate -translate-y-1/2">
+          <FaHeart className="border-[1px] cursor-pointer border-gray-300 p-2 text-red-400 rounded-full bg-white " />
+          <MdShoppingCart className="border-[1px] cursor-pointer border-gray-300 p-2 text-tBase rounded-full bg-white" />
+        </div>
+
       </div>
 
-    </div>
+    </ReactCardFlip>
+
   )
 }
 
