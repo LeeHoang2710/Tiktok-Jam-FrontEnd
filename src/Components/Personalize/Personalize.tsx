@@ -1,37 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ComboBox from './ComboBox';
 import { FaRobot } from 'react-icons/fa';
 
 
 
 const Personalize = () => {
+   const allCategories: any = {
+      "clothing": ["formal", "tops", "shoes", "pajamas", "hoodies", "grunge", "industrial", "jeans", "business casual", "blouses", "kids", "t-shirts", "sporty", "sweatshirts", "classic", "pants", "shirts", "sleepwear", "sweaters", "dresses", "streetwear", "trousers", "shorts", "scandinavian", "athleisure", "blazers", "artsy", "underwear", "vintage", "polo shirts", "bohemian", "punk", "leggings", "women", "modern", "traditional", "trendy", "men", "minimalist", "ethnic", "jerseys", "bodysuits", "country", "skirts", "preppy", "hats", "casual dresses", "casual", "gothic", "gloves", "polos", "chic", "scarves", "hipster", "lingerie", "socks", "jackets", "sweatpants", "coats", "retro", "suits", "loungewear", "dress shirts"
+      ],
+      "sport": ["urban", "casual"
+      ],
+      "cookware": ["formal", "vintage", "country", "glamorous"
+      ],
+      "home": ["urban", "art deco", "glamorous", "modern"
+      ],
+      "cleaning": ["bohemian", "modern", "traditional", "minimalist", "art deco", "rustic", "country"
+      ],
+      "shoes": ["urban", "country", "bohemian", "classic"
+      ],
+      "accessories": ["country", "retro", "chic"
+      ],
+      "electronics": ["user-friendly", "compact", "ergonomic", "sleek"
+      ],
+      "books": ["casual", "industrial", "sporty", "bohemian"
+      ],
+      "sports & outdoors": ["rustic", "casual", "traditional", "country"
+      ],
+      "beauty & personal care": ["formal", "vintage", "trendy", "industrial"
+      ],
+      "toys & games": ["urban", "minimalist", "trendy", "industrial"
+      ],
+      "health & household": ["art deco", "country", "bohemian", "classic"
+      ],
+      "automotive": ["urban", "art deco", "minimalist", "country"
+      ],
+      "baby products": ["vintage", "traditional", "retro", "glamorous"
+      ],
+      "pet supplies": ["casual", "glamorous", "trendy", "sporty"
+      ],
+      "grocery & gourmet food": ["country", "trendy", "chic", "classic"
+      ],
+      "musical instruments": ["urban", "formal", "glamorous", "rustic"
+      ],
+      "office products": ["modern", "traditional", "trendy"
+      ],
+      "tools & home improvement": ["art deco", "traditional", "industrial", "retro"
+      ],
+      "jewelry": ["vintage", "glamorous", "trendy", "minimalist"
+      ],
+      "luggage & travel gear": ["sporty", "traditional", "classic"
+      ],
+      "garden & outdoor": ["modern", "traditional", "trendy", "glamorous"
+      ],
+      "arts, crafts & sewing": ["rustic", "urban", "bohemian"
+      ],
+      "industrial & scientific": ["modern", "country", "retro", "scandinavian"
+      ],
+      "gifts": ["trendy", "industrial", "chic", "classic"
+      ]
+   }
 
    const [minprice, setMinPrice] = useState<number>(100)
    const [maxprice, setMaxPrice] = useState<number>(5000)
    const [showInput, setShowInput] = useState<boolean>(false)
-   const [selectedRating, setSelectedRating] = useState('');
-   const [selectedPopularity, setSelectedPopularity] = useState('');
+   const [category, setCategory] = useState<string>('')
+   const [styles, setStyles] = useState<string[]>([])
+   const [selectedStyles, setSelectedStyles] = useState({});
 
-   const handleSelectRating = (rating: string) => {
-      setSelectedRating(rating);
-   };
-
-   const handleSelectPopularity = (popularity: string) => {
-      setSelectedPopularity(popularity);
-   };
    const handleReset = () => {
       setMinPrice(100);
       setMaxPrice(5000);
       setShowInput(false);
-      setSelectedRating('');
-      setSelectedPopularity('');
+
+   };
+   const handleStyleSelect = (selectedStyle: string) => {
+      setStyles(prevStyles => {
+         if (prevStyles.includes(selectedStyle)) {
+            // Remove the style if it's already selected
+            return prevStyles.filter(style => style !== selectedStyle);
+         } else {
+            // Add the style if it's not already selected
+            return [...prevStyles, selectedStyle];
+         }
+      });
    };
 
    return (
       <div className="w-full mx-auto bg-neutral-900 shadow-lg overflow-y-scroll">
          <section className="mt-4 flex items-center justify-between px-4">
             <h3 className="text-xl font-semibold text-white">Categories</h3>
-            <ComboBox />
+            <ComboBox category={category} setCategory={setCategory} />
+         </section>
+         <section className="mt-4 px-4">
+            <h3 className="text-xl font-semibold text-white ">Style</h3>
+            <div className="flex flex-col gap-4 mt-2 px-2 py-2 overflow-x-scroll hide-scroll-bar bg-neutral-900">
+               {category && allCategories[category] && (
+                  <>
+                     <div className="flex items-center justify-start gap-4 overflow-x-scroll hide-scroll-bar">
+                        {allCategories[category].slice(0, Math.ceil(allCategories[category].length / 2)).map((style: string) => (
+                           <button key={style} className="w-18 h-18 px-4 py-2 bg-neutral-200 transition-all cursor-pointer items-center justify-center flex rounded-lg focus:bg-red-400 focus:text-red-200"
+                              onClick={() => handleStyleSelect(style)}>
+                              <span className='text-sm text-nowrap'>
+                                 {style.length <= 10 ? style : `${style.slice(0, 10)}..`}
+                              </span>
+                           </button>
+                        ))}
+                     </div>
+                     <div className="flex items-center justify-start gap-4 overflow-x-scroll hide-scroll-bar">
+                        {allCategories[category].slice(Math.ceil(allCategories[category].length / 2)).map((style: string) => (
+                           <button key={style} className="w-18 h-18 px-2 py-2 bg-neutral-200 transition-all cursor-pointer items-center justify-center flex rounded-lg  focus:bg-red-400 focus:text-red-200"
+                              onClick={() => handleStyleSelect(style)}>
+                              <span className='text-sm text-nowrap'>
+                                 {style.length <= 10 ? style : `${style.slice(0, 10)}..`}
+                              </span>
+                           </button>
+                        ))}
+                     </div>
+                  </>
+               )}
+            </div>
          </section>
          <section className="mt-4 px-4">
             <h3 className="text-xl font-semibold text-white">Prices: ${minprice} - ${maxprice}</h3>
@@ -49,34 +136,6 @@ const Personalize = () => {
                </div>
             </div>
          </section>
-         <section className="mt-4 px-4">
-            <h3 className="text-xl font-semibold text-white ">Rating</h3>
-            <div className="flex flex-wrap justify-start gap-4 mt-2 px-2">
-               {['4.5 - 5 Stars', '4 - 4.5 Stars', '3 - 4 Stars'].map((rating) => (
-                  <button
-                     key={rating}
-                     className={`bg-neutral-600 ${selectedRating === rating ? 'bg-red-400 text-red-200' : 'text-white'} focus:bg-red-400 focus:text-red-200 font-bold py-2 px-4 rounded`}
-                     onClick={() => handleSelectRating(rating)}
-                  >
-                     {rating}
-                  </button>
-               ))}
-            </div>
-         </section>
-         <section className="mt-4 px-4">
-            <h3 className="text-xl font-semibold text-white">Popularity</h3>
-            <div className="flex flex-wrap justify-start gap-4 mt-2 px-2">
-               {['Trending Now', 'Top Selling', 'Most Visited', 'New Arrivals'].map((popularity) => (
-                  <button
-                     key={popularity}
-                     className={`bg-neutral-600 ${selectedPopularity === popularity ? 'bg-red-400 text-red-200' : 'text-white'} focus:bg-red-400 focus:text-red-200 font-bold py-2 px-4 rounded`}
-                     onClick={() => handleSelectPopularity(popularity)}
-                  >
-                     {popularity}
-                  </button>
-               ))}
-            </div>
-         </section>
          <section className='mt-4 flex flex-row items-center justify-between px-4 pb-4'>
             <h3 className="text-xl font-semibold text-white">ChatBot</h3>
             <button className="w-12 h-12 max-w-xs rounded-full bg-blue-600 transition-all cursor-pointer items-center justify-center flex"
@@ -87,7 +146,7 @@ const Personalize = () => {
          {showInput && (
             <div className="w-full p-4 ">
                <textarea
-                  className="w-full h-48 p-4 text-xl outline-none"
+                  className="w-full h-24 p-4 text-xl outline-none"
                   placeholder="Type your needs here..."
                />
             </div>
@@ -102,3 +161,14 @@ const Personalize = () => {
 };
 
 export default Personalize;
+
+{/* <div className="flex items-center justify-start gap-4 mt-2 px-2 py-2 overflow-x-scroll hide-scroll-bar bg-neutral-100">
+               {allCategories.slice(0, 10).map((category) => (
+                  <div className='flex flex-col items-center' key={category}>
+                     <button className="w-12 h-12 max-w-xs rounded-full bg-neutral-200 transition-all cursor-pointer items-center justify-center flex">
+                        <span className='text-2xl'>{categoryIcons[category]}</span>
+                     </button>
+                     <p>{category.length <= 10 ? category : `${category.slice(0, 10)}...`}</p>
+                  </div>
+               ))}
+            </div> */}

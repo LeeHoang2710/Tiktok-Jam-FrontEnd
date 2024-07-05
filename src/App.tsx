@@ -4,7 +4,6 @@ import Personalize from './components/Personalize/Personalize';
 import ForYouPage from './pages/ForYouPage'
 import MainPage from './pages/MainPage';
 import { Button } from '../@/components/ui/button'
-import DialogDemo from './components/Test';
 import Rating from './components/Rating';
 
 

@@ -5,7 +5,7 @@ import { Product } from './type';
 export const fetchProducts: any = createAsyncThunk(
    'product/fetchProducts',
    async () => {
-      const response = await axios.get<Product[]>('http://localhost:5000/products');
+      const response = await axios.post<Product[]>('http://127.0.0.1:8000/recommend/get-historyrec/');
       return response.data;
    }
 );

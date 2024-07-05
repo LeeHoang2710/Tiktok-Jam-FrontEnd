@@ -3,14 +3,15 @@ import { Check, ChevronsUpDown } from "lucide-react"
 
 import { cn } from "../../../@/lib/utils"
 import { Button } from "../../../@/components/ui/button"
-
+import { ScrollArea } from '../../../@/components/ui/scroll-area'
 
 import {
    Command,
    CommandEmpty,
-   CommandList,
+   CommandGroup,
    CommandInput,
    CommandItem,
+   CommandList,
 } from "../../../@/components/ui/command"
 import {
    Popover,
@@ -118,10 +119,14 @@ const categories = [
    },
 ]
 
+interface ComboBoxProps {
+   category: string
+   setCategory: (category: string) => void
+}
 
-const ComboBox = () => {
+
+const ComboBox: React.FC<ComboBoxProps> = ({ category, setCategory }) => {
    const [open, setOpen] = useState(false)
-   const [value, setValue] = useState("")
 
    return (
       <Popover open={open} onOpenChange={() => setOpen(!open)}>
@@ -132,8 +137,8 @@ const ComboBox = () => {
                aria-expanded={open}
                className="w-[200px] justify-between bg-white"
             >
-               {value
-                  ? categories.find((category) => category.value === value)?.label
+               {category
+                  ? categories.find((category1) => category1.value === category)?.label
                   : "Select category..."}
                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -142,24 +147,26 @@ const ComboBox = () => {
             <Command className='bg-white'>
                <CommandInput placeholder="Search category..." />
                <CommandEmpty>No category found.</CommandEmpty>
-               <CommandList className='h-[200px] hide-scroll-bar'>
-                  {categories.map((category) => (
-                     <CommandItem
-                        key={category.value}
-                        value={category.value}
-                        onSelect={(currentValue) => {
-                           setValue(currentValue === value ? "" : currentValue)
-                           setOpen(false)
-                        }}>
-                        <Check
-                           className={cn(
-                              "mr-2 h-4 w-4",
-                              value === category.value ? "opacity-100" : "opacity-0"
-                           )}
-                        />
-                        {category.label}
-                     </CommandItem>
-                  ))}
+               <CommandList>
+                  <ScrollArea className='h-[200px] hide-scroll-bar'>
+                     {categories.map((category1) => (
+                        <CommandItem
+                           key={category1.value}
+                           value={category1.value}
+                           onSelect={(currentValue) => {
+                              setCategory(currentValue === category ? "" : currentValue)
+                              setOpen(false)
+                           }}>
+                           <Check
+                              className={cn(
+                                 "mr-2 h-4 w-4",
+                                 category === category1.value ? "opacity-100" : "opacity-0"
+                              )}
+                           />
+                           {category1.label}
+                        </CommandItem>
+                     ))}
+                  </ScrollArea>
                </CommandList>
             </Command>
          </PopoverContent>
