@@ -5,11 +5,11 @@ import DisplayItem from '../components/ForYouPage/DisplayItem'
 import { Link } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../hooks/storeHook';
 import { fetchProducts } from '../redux/features/products/productSlice';
+import PopupDrawer from '@/components/Personalize/PopupDrawer';
+import Rating from '@/components/Rating';
 
 
-type Props = {}
-
-const ForYouPage = (props: Props) => {
+const ForYouPage = () => {
   const themes = [
     { id: "one",
       name: "Mystery",
@@ -86,6 +86,7 @@ const ForYouPage = (props: Props) => {
         
       </div>
       </div>
+      <Rating />
       
       <Footer />
     </div>
