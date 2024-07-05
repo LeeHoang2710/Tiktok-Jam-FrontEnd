@@ -4,9 +4,11 @@ import Footer from '../components/Footer'
 import DisplayItem from '../components/ForYouPage/DisplayItem'
 import { useAppSelector, useAppDispatch } from '../hooks/storeHook';
 import { fetchProducts } from '../redux/features/products/productSlice';
-type Props = {}
+import PopupDrawer from '@/components/Personalize/PopupDrawer';
+import Rating from '@/components/Rating';
 
-const ForYouPage = (props: Props) => {
+
+const ForYouPage = () => {
 
   const dispatch = useAppDispatch()
   useEffect(() => {
@@ -38,10 +40,13 @@ const ForYouPage = (props: Props) => {
           {displayItems.map((product) => (<DisplayItem key={product.id} product={product} />))}
         </div>
         <div className="flex justify-between font-medium mx-auto gap-16 ">
-          <button className="bg-secTheme shadow-xl py-2 px-2 w-[150px] rounded-xl text-md">Not Interested</button>
+          <div className="bg-secTheme text-center shadow-xl py-2 px-2 w-[150px] rounded-xl text-md pl-4">
+            <PopupDrawer />
+          </div>
           <button className="bg-white shadow-xl py-2 px-2 w-[150px] rounded-xl text-md">See More</button>
         </div>
       </div>
+      <Rating />
       <Footer />
     </div>
   )
