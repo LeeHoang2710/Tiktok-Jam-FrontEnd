@@ -10,6 +10,7 @@ export const fetchProducts: any = createAsyncThunk(
    }
 );
 
+
 interface ProductState {
    products: Product[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
