@@ -77,16 +77,15 @@ const ForYouPage = () => {
             <button className="w-full bg-buttonPrimary text-tBase shadow-xl py-3 rounded-xl text-md ">See More</button>
           </div>
         </div>
-        <div className="relative flex h-10 font-custom w-full items-center ">
+        <div className="relative flex h-10  font-custom w-full items-center ">
           <button
             className="w-1/5 bg-gradient-to-r from-bgSecondary to-bgPrimary rounded-3xl opacity-95"
             onClick={() => { setIsTheme(!isTheme) }
             }>Theme</button>
-          <div className={`w-[90%] ${isTheme ? "visible translate transition duration-400 ease-linear translate-x-[10px] top-2" : "fade-outcus transform translate-x-[-px] "}`}>
-            {(themes.map((t) => (
-              <button key={t.id} className={`w-1/5 cursor-pointer bg-bgPrimary rounded-lg opacity-75`} onClick={() => setTheme(t.id)}>{t.name}</button>)
-            ))
-            }
+          <div className={`w-[90%] flex ${isTheme ? "visible translate transition duration-400 ease-linear translate-x-[10px] top-2" : "fade-outcus transform translate-x-[-px]"} gap-1 space-x-0.5`}>
+            {themes.map((t) => (
+              <button key={t.id} className={`w-1/5 cursor-pointer bg-bgPrimary rounded-lg opacity-75`} onClick={() => setTheme(t.id)}>{t.name}</button>
+            ))}
           </div>
           <div className="absolute mx-auto top-0 left-1/2 -translate-x-1/2 -translate-y-full"><Rating /></div>
         </div>
