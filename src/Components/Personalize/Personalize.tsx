@@ -65,8 +65,12 @@ const Personalize = () => {
    const [showInput, setShowInput] = useState<boolean>(false)
    const [category, setCategory] = useState<string>('')
    const [styles, setStyles] = useState<string[]>([])
-   const [selectedStyles, setSelectedStyles] = useState({});
-
+   
+   useEffect(() => {
+      // This function will be called whenever the category changes.
+      setStyles([]); // Reset selectedStyles to an empty array
+    }, [category]);
+      
    const handleReset = () => {
       setMinPrice(100);
       setMaxPrice(5000);
@@ -86,7 +90,7 @@ const Personalize = () => {
    };
 
    return (
-      <div className="w-full mx-auto bg-neutral-900 shadow-lg overflow-y-scroll">
+      <div className="w-full mx-auto font-custom bg-bgDark shadow-lg overflow-y-scroll">
          <section className="mt-4 flex items-center justify-between px-4">
             <h3 className="text-xl font-semibold text-white">Categories</h3>
             <ComboBox category={category} setCategory={setCategory} />
@@ -98,7 +102,7 @@ const Personalize = () => {
                   <>
                      <div className="flex items-center justify-start gap-4 overflow-x-scroll hide-scroll-bar">
                         {allCategories[category].slice(0, Math.ceil(allCategories[category].length / 2)).map((style: string) => (
-                           <button key={style} className="w-18 h-18 px-4 py-2 bg-neutral-200 transition-all cursor-pointer items-center justify-center flex rounded-lg focus:bg-red-400 focus:text-red-200"
+                           <button key={style} className={`w-18 h-18 px-4 py-2 font-medium bg-gray-200 transition-all cursor-pointer items-center justify-center flex rounded-lg ${styles.includes(style) ? 'bg-rose-900 text-neutral-200' :""}`}
                               onClick={() => handleStyleSelect(style)}>
                               <span className='text-sm text-nowrap'>
                                  {style.length <= 10 ? style : `${style.slice(0, 10)}..`}
@@ -108,7 +112,7 @@ const Personalize = () => {
                      </div>
                      <div className="flex items-center justify-start gap-4 overflow-x-scroll hide-scroll-bar">
                         {allCategories[category].slice(Math.ceil(allCategories[category].length / 2)).map((style: string) => (
-                           <button key={style} className="w-18 h-18 px-2 py-2 bg-neutral-200 transition-all cursor-pointer items-center justify-center flex rounded-lg  focus:bg-red-400 focus:text-red-200"
+                           <button key={style} className={`w-18 h-18 px-4 py-2 bg-neutral-200 transition-all cursor-pointer items-center justify-center flex rounded-lg ${styles.includes(style) ? 'bg-rose-900 text-neutral-200' :""}`}
                               onClick={() => handleStyleSelect(style)}>
                               <span className='text-sm text-nowrap'>
                                  {style.length <= 10 ? style : `${style.slice(0, 10)}..`}
@@ -138,7 +142,7 @@ const Personalize = () => {
          </section>
          <section className='mt-4 flex flex-row items-center justify-between px-4 pb-4'>
             <h3 className="text-xl font-semibold text-white">ChatBot</h3>
-            <button className="w-12 h-12 max-w-xs rounded-full bg-blue-600 transition-all cursor-pointer items-center justify-center flex"
+            <button className="w-12 h-12 max-w-xs rounded-full bg-rose-900 transition-all cursor-pointer items-center justify-center flex"
                onClick={() => setShowInput(!showInput)}>
                <span className='text-2xl text-white'><FaRobot /></span>
             </button>
@@ -147,13 +151,13 @@ const Personalize = () => {
             <div className="w-full p-4 ">
                <textarea
                   className="w-full h-24 p-4 text-xl outline-none"
-                  placeholder="Type your needs here..."
+                  placeholder="Tell me you circumstances... (eg: i need a dress for a wedding)"
                />
             </div>
          )}
          <div className="py-4 px-2 flex bottom-0 left-0 right-0 items-center bg-neutral-800 justify-center gap-2">
-            <button className="bg-red-600 text-white font-bold py-2 px-16 rounded-lg" onClick={() => handleReset()}>Reset</button>
-            <button className="bg-blue-600 text-white font-bold py-2 px-16 rounded-lg no-text-wrap">Show result</button>
+            <button className="bg-gray-500 text-white font-bold py-2 px-16 rounded-lg" onClick={() => handleReset()}>Reset</button>
+            <button className="bg-rose-900 text-white font-bold py-2 px-16 rounded-lg no-text-wrap" onClick={() => {console.log(styles)}}>Show result</button>
          </div>
       </div>
 

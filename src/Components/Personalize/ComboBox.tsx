@@ -135,7 +135,7 @@ const ComboBox: React.FC<ComboBoxProps> = ({ category, setCategory }) => {
                variant="outline"
                role="combobox"
                aria-expanded={open}
-               className="w-[200px] justify-between bg-white"
+               className="w-[200px] justify-between bg-gray-300 font-custom font-bold"
             >
                {category
                   ? categories.find((category1) => category1.value === category)?.label
@@ -144,7 +144,7 @@ const ComboBox: React.FC<ComboBoxProps> = ({ category, setCategory }) => {
             </Button>
          </PopoverTrigger>
          <PopoverContent className="w-[200px] p-0">
-            <Command className='bg-white'>
+            <Command className='bg-gray-300'>
                <CommandInput placeholder="Search category..." />
                <CommandEmpty>No category found.</CommandEmpty>
                <CommandList>
