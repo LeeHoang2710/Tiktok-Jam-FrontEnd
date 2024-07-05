@@ -1,47 +1,46 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Product } from './type';
+import { data } from '../../../components/Personalize/Personalize'
 
-export const fetchProducts: any = createAsyncThunk(
-   'product/fetchProducts',
+export const getProducts: any = createAsyncThunk(
+   'product/getProducts',
    async () => {
-      const response = await axios.post<Product[]>('http://127.0.0.1:8000/recommend/get-historyrec/');
+      const response = await axios.post<Product[]>('http://127.0.0.1:8000/recommend/get-combinedrec/', data)
+
       return response.data;
    }
-);
-
+)
 
 interface ProductState {
-   products: Product[];
+   querys: Product[];
    status: 'idle' | 'loading' | 'succeeded' | 'failed';
    error: string | null;
 }
 
 const initialState: ProductState = {
-   products: [],
+   querys: [],
    status: 'idle',
    error: null,
 };
-
-const productSlice = createSlice({
-   name: 'product',
+const querySlice = createSlice({
+   name: 'query',
    initialState,
    reducers: {},
    extraReducers: (builder) => {
       builder
-         .addCase(fetchProducts.pending, (state) => {
+         .addCase(getProducts.pending, (state) => {
             state.status = 'loading';
          })
-         .addCase(fetchProducts.fulfilled, (state, action) => {
+         .addCase(getProducts.fulfilled, (state, action) => {
             state.status = 'succeeded';
             // Add any fetched products to the array
-            state.products = action.payload;
+            state.querys = action.payload;
          })
-         .addCase(fetchProducts.rejected, (state, action) => {
+         .addCase(getProducts.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.error.message || 'Something went wrong';
          });
    },
 });
-
-export default productSlice.reducer
+export default querySlice.reducer

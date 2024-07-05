@@ -11,7 +11,8 @@ import Rating from '@/components/Rating';
 
 const ForYouPage = () => {
   const themes = [
-    { id: "one",
+    {
+      id: "one",
       name: "Mystery",
     },
     {
@@ -19,8 +20,8 @@ const ForYouPage = () => {
       name: "Night",
     },
     {
-      id:"three",
-      name:"Dreamy",
+      id: "three",
+      name: "Dreamy",
     },
     {
       id: "four",
@@ -32,7 +33,11 @@ const ForYouPage = () => {
     dispatch(fetchProducts())
   }, [dispatch])
   const getAllProduct = useAppSelector((state) => state.product.products)
-  const displayItems = getAllProduct.slice(0, 4)
+  const getAllQuery = useAppSelector((state) => state.query.querys)
+  console.log(getAllProduct);
+  console.log(getAllQuery);
+  const displayItems = getAllQuery.length !== 0 ? getAllQuery.slice(0, 4) : getAllProduct.slice(0, 4)
+  console.log(displayItems);
   const [pick, Setpick] = useState(1);
   const [theme, setTheme] = useState<string>(themes[2].id);
   const [isTheme, setIsTheme] = useState<boolean>(false);
@@ -48,13 +53,13 @@ const ForYouPage = () => {
             `}
             onClick={() => { Setpick(1) }}>Favorite
           </button>
-          <button key={2} 
+          <button key={2}
             className={` p-1 border-y-[1px] border-gray-700 bg-bgPrimary w-1/3 text-center
             ${(pick === 2) ? "bg-buttonPrimary " : ""}
           `}
             onClick={() => { Setpick(2) }}>Explore
           </button>
-          <button key={3} 
+          <button key={3}
             className={` p-1 border-[1px] border-gray-700 bg-bgPrimary rounded-r-lg w-1/3 text-center
             ${(pick === 3) ? "bg-buttonPrimary " : ""}`}
             onClick={() => { Setpick(3) }}>Flash Sale
@@ -65,25 +70,25 @@ const ForYouPage = () => {
         </div>
         <div className="w-full flex justify-between font-custom font-semibold gap-8 opacity-90 ">
           <div className="w-full ">
-          <button className="w-full bg-bgPrimary text-tBase shadow-xl py-3 rounded-xl text-md "><PopupDrawer/></button>
-            
+            <button className="w-full bg-bgPrimary text-tBase shadow-xl py-3 rounded-xl text-md "><PopupDrawer /></button>
+
           </div>
           <div className="w-full">
             <button className="w-full bg-buttonPrimary text-tBase shadow-xl py-3 rounded-xl text-md ">See More</button>
           </div>
         </div>
         <div className="relative flex h-10 font-custom w-full items-center ">
-          <button 
-          className="w-1/5 bg-gradient-to-r from-bgSecondary to-bgPrimary rounded-3xl opacity-95"
-          onClick={() => {setIsTheme(!isTheme)}
-          }>Theme</button> 
-          <div className={`w-[90%] ${isTheme ? "visible translate transition duration-400 ease-linear translate-x-[10px] top-2": "fade-outcus transform translate-x-[-px] "}` }>
-          {(themes.map((t) => (
-            <button key={t.id} className={`w-1/5 cursor-pointer bg-bgPrimary rounded-lg opacity-75`} onClick={() => setTheme(t.id)}>{t.name}</button>)
-          ))
-          }
+          <button
+            className="w-1/5 bg-gradient-to-r from-bgSecondary to-bgPrimary rounded-3xl opacity-95"
+            onClick={() => { setIsTheme(!isTheme) }
+            }>Theme</button>
+          <div className={`w-[90%] ${isTheme ? "visible translate transition duration-400 ease-linear translate-x-[10px] top-2" : "fade-outcus transform translate-x-[-px] "}`}>
+            {(themes.map((t) => (
+              <button key={t.id} className={`w-1/5 cursor-pointer bg-bgPrimary rounded-lg opacity-75`} onClick={() => setTheme(t.id)}>{t.name}</button>)
+            ))
+            }
           </div>
-          <div className="absolute mx-auto top-0 left-1/2 -translate-x-1/2 -translate-y-full"><Rating/></div>
+          <div className="absolute mx-auto top-0 left-1/2 -translate-x-1/2 -translate-y-full"><Rating /></div>
         </div>
       </div>
       <Footer />

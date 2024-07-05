@@ -3,8 +3,11 @@ import ComboBox from './ComboBox';
 import { FaRobot } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios'
+import { useAppDispatch } from '@/hooks/storeHook';
+import { getProducts } from '../../redux/features/products/querySlice';
 
+
+let data = {}
 
 const Personalize = () => {
    const allCategories: any = {
@@ -68,11 +71,21 @@ const Personalize = () => {
    const [category, setCategory] = useState<string>('')
    const [styles, setStyles] = useState<string[]>([])
    const [AI_query, setQuery] = useState<string>('')
+   const [submitTrigger, setSubmitTrigger] = useState<boolean>(false)
 
+   const dispatch = useAppDispatch()
    useEffect(() => {
       // This function will be called whenever the category changes.
       setStyles([]); // Reset selectedStyles to an empty array
    }, [category]);
+
+   useEffect(() => {
+      // This effect now depends on submitTrigger
+      if (submitTrigger) {
+         dispatch(getProducts());
+         setSubmitTrigger(false); // Reset trigger
+      }
+   }, [submitTrigger, dispatch]);
 
    const handleReset = () => {
       setMinPrice(100);
@@ -81,15 +94,15 @@ const Personalize = () => {
       setCategory('');
       setQuery('');
    };
-   const handleSubmit = async () => {
+   const handleSubmit = () => {
       if (low_price === 0 && high_price === 3000 && category === '' && styles.length === 0 && AI_query === '') {
          toast.error("Please select at least one option!", { autoClose: 2000 });
       }
       else {
          const checkbox_categories = { low_price, high_price, category, styles }
-         const data = { checkbox_categories, AI_query }
+         data = { checkbox_categories, AI_query }
          console.log(data);
-         // const respose = await axios.post('http://127.0.0.1:8000/', data)
+         setSubmitTrigger(true);
          toast.success("Submit successfully!", { autoClose: 2000 });
       }
    }
@@ -189,3 +202,4 @@ const Personalize = () => {
 };
 
 export default Personalize;
+export { data }
