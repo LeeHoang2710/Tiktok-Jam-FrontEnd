@@ -4,17 +4,13 @@ import Personalize from './components/Product/Personalize';
 import ForYouPage from './pages/ForYouPage'
 import MainPage from './pages/MainPage';
 import { Button } from '../@/components/ui/button'
-
+import "./index.css"
 
 const App = () => {
   return (
     <div className='bg-neutral-800'>
       <Routes>
-        <Route path='/foryou' element={<ForYouPage />} />
-        <Route path='/' element={
-          <div>
-            <MainPage />
-          </div>} />
+        <Route path='/' element={<ForYouPage/>}/>
         <Route path='/personalize' element={<Personalize />} />
         <Route path='/new' element={
           <div className='bg-red-600'>

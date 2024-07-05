@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -84,4 +86,58 @@
     left: 50%;
     width: 100%;
   }
+}
+.theme-two{
+  /* --color-primary: #FF0000;
+  --color-secondary: #F7E7DC; */
+  --background-image-url: url('./public/Elements/Bg2.jpg');
+  --color-bg-primary: #FFFFE6;
+  --color-bg-secondary: #3275A9;
+  --color-button-primary: #FFC3A8;
+  --color-text-base: #10457B;
+  --color-text-base-secondary: #6c87a2;
+
+  background-image: var(--background-image-url);
+}
+.theme-one{
+  /* --color-primary: #FF0000;
+  --color-secondary: #F7E7DC; */
+  --background-image-url: url('./public/Elements/Bg1.jpg');
+  --color-bg-primary: #FFEDE6;
+  --color-bg-secondary: #008080;
+  --color-button-primary: #FEB155;
+  --color-text-base: #484E8C;
+  --color-text-base-secondary: #989bbd;
+;
+
+  background-image: var(--background-image-url);
+}
+.theme-three{
+  /* --color-primary: #FF0000;
+  --color-secondary: #F7E7DC; */
+  --background-image-url: url('./public/Elements/Bg3.jpg');
+  --color-bg-primary: #DCD6F7;
+  --color-bg-secondary: #5b33d4;
+  --color-button-primary: #ecacf9;
+  --color-text-base: #24107b;
+  --color-text-base-secondary: #535db4;
+
+  background-image: var(--background-image-url);
+}
+.theme-four{
+  /* --color-primary: #FF0000;
+  --color-secondary: #F7E7DC; */
+  --background-image-url: url('./public/Elements/Bg4.jpg');
+  --color-bg-primary: #FDBFC0;
+  --color-bg-secondary: #3AA6B9;
+  --color-button-primary: #62b4d4;
+  --color-text-base: #2365a7;
+  --color-text-base-secondary: #438cd4;
+
+  background-image: var(--background-image-url);
+}
+.fade-outcus {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out, visibility 0s linear 0.5s; /* Ensure visibility changes after opacity */
 }
