@@ -31,9 +31,12 @@ const DisplayItem = ({ product }: Props) => {
     setRandomSold(getInteger(500, 2000))
     setWidth(`w-[${randomNumber}%]`)
   }, [])
+  useEffect(() => {
+    setFlip(!flip)
+  }, [product])
   return (
     <ReactCardFlip isFlipped={flip} flipDirection="horizontal">
-      <div className="relative mx-auto flex flex-col justify-between items-center pt-6 pb-4 gap-2 w-[90%] h-[90%] rounded-[48px] shadow-xl bg-bgPrimary " onClick={() => { setFlip(!flip) }}>
+      <div className="relative mx-auto flex flex-col justify-between items-center pt-6 pb-4 gap-2 w-[90%] h-[90%] rounded-[48px] shadow-xl bg-bgPrimary ">
         <div className="flex w-5/6 border-2 border-gray-300 items-center h-3/5  rounded-[36px] overflow-hidden">
           <img src={pro1} className="object-cover"></img>
         </div>
