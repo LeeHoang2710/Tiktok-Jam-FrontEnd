@@ -28,19 +28,34 @@ const ForYouPage = () => {
       name: "Lofi",
     }
   ];
+  const [pick, Setpick] = useState(1);
+  const [theme, setTheme] = useState<string>(themes[2].id);
+  const [isTheme, setIsTheme] = useState<boolean>(false);
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
   const getAllProduct = useAppSelector((state) => state.product.products)
   const getAllQuery = useAppSelector((state) => state.query.querys)
+  const salesProducts = getAllProduct.filter(product => product.price_cents < 3000);
+  const trendyProducts = getAllProduct.filter(product => product.styles.includes("t-shirts"));
   console.log(getAllProduct);
   console.log(getAllQuery);
-  const displayItems = getAllQuery.length !== 0 ? getAllQuery.slice(0, 4) : getAllProduct.slice(0, 4)
+  let displayItems = []
+  if (pick === 1 && getAllQuery.length !== 0) {
+    displayItems = getAllQuery.slice(0, 4)
+  }
+  else if (pick === 2) {
+    displayItems = trendyProducts.slice(1, 5)
+  }
+  else if (pick === 3) {
+    displayItems = salesProducts.slice(0, 4)
+  }
+  else {
+    displayItems = getAllProduct.slice(0, 4)
+  }
   console.log(displayItems);
-  const [pick, Setpick] = useState(1);
-  const [theme, setTheme] = useState<string>(themes[2].id);
-  const [isTheme, setIsTheme] = useState<boolean>(false);
+
   return (
     <div className={`h-screen w-screen max-h-[950px] justify-between max-w-md  theme-${theme} bg-cover mx-auto shadow-lg font-custom transition-all duration-500 ease-in-out`}>
       <Header />

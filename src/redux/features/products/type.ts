@@ -7,4 +7,5 @@ export interface Product {
    rating_stars: number;
    price_cents: number;
    category: string;
+   styles: string[];
 }
